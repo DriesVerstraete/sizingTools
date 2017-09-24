@@ -1,19 +1,20 @@
 
-function [c,ceq] = sizing(m0,r,cap,AR,m_payload,opt)
+function [c,ceq] = sizing(m0,r,cap,AR,vc,m_payload,opt)
 
 %scale inputs
-scaleFactors = [1000 1 .01 10 ];
+scaleFactors = [1000 1 .01 10 100];
 m0  = m0  * scaleFactors(1);
 r   = r   * scaleFactors(2);
 cap = cap * scaleFactors(3);
 AR  = AR  * scaleFactors(4);
+vc  = 100 * scaleFactors(5);
 
 %Inputs
 m=m0;
 
 %Mission
 range = 100000; %Range [m]
-vc = 65; %Cruise speed [m/s]
+vc = 200; %Cruise speed [m/s]
 t_hover = 4*60; %Time to hover [s]
 
 %Constants
