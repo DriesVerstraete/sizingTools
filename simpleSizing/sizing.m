@@ -7,14 +7,15 @@ m0  = m0  * scaleFactors(1);
 r   = r   * scaleFactors(2);
 cap = cap * scaleFactors(3);
 AR  = AR  * scaleFactors(4);
-vc  = 100 * scaleFactors(5);
+vc  = vc * scaleFactors(5);
+vc  = 65;
 
 %Inputs
 m=m0;
 
 %Mission
-range = 100000; %Range [m]
-vc = 200; %Cruise speed [m/s]
+range = 50000; %Range [m]
+%vc = 200; %Cruise speed [m/s]
 t_hover = 4*60; %Time to hover [s]
 
 %Constants
@@ -127,7 +128,7 @@ cRate = max([(1+control_margin)*P_motorH*n_motors P_cruise])/energy;
 
 %Mass
 m_battery = energy/specific_energy;
-m = m_payload+m_fixed+n_motors*(m_motor+m_rotor)+m_battery+m_wire+m_wing;
+m = m_payload+m_fixed+n_motors*(m_motor+m_rotor)+m_battery+m_wire+2*m_wing;
 m_other = m_other_frac*m;
 m = m_other+m;
 

@@ -1,9 +1,11 @@
 clear;clc
 increment = 10;
 payload = [100:increment:600];
+%payload = 300:100:400;
 scaleFactors = [1000 1 .01 10 100];
 x = [540 1 .01 10 100];
 x = x./scaleFactors;
+options=optimoptions(@fmincon,'display','none');
 
 outputlegend = {...
     'Fixed',...
@@ -22,7 +24,7 @@ for i=1:length(payload)
     lb = lb./scaleFactors; ub = ub./scaleFactors;
     [x,fval,exitflag] = fmincon(@(x)sizing(x(1),x(2),x(3),x(4),x(5),m_payload,0),...
                 x,[],[],[],[],lb,ub,...
-                @(x)sizing(x(1),x(2),x(3),x(4),x(5),m_payload,1));
+                @(x)sizing(x(1),x(2),x(3),x(4),x(5),m_payload,1),options);
     [weights(i,:), metrics(i,:)] = sizing(x(1),x(2),x(3),x(4),x(5),m_payload,2);
    
     if exitflag>0
